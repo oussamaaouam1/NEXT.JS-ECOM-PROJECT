@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --header-height: 64px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+  height: var(--header-height); /* Use the variable for the header height */
+}
+
+.main-content {
+  padding-top: var(--header-height); /* Use the variable for padding */
+}
+
+
+@media (max-width: 768px) {
+  :root {
+    --header-height: 56px; /* Adjust for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --header-height: 48px; /* Further adjust for mobile */
+  }
+}
