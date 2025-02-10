@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteFromCart } from "../_redux/deleteCartItemSlice";
 import { getCartItems } from "../_redux/getCartItemsSlice"; // Import the action
 import { useUser } from "@clerk/nextjs";
-
-
+import { useRouter } from "next/navigation";
 
 function Cart() {
   const [randomDiscount, setRandomDiscount] = React.useState(0);
   const dispatch = useDispatch();
   const { items } = useSelector((state) => state.getCartItems);
+  const router = useRouter();
 
   React.useEffect(() => {
     setRandomDiscount(Math.floor(Math.random() * (30 - 5 + 1)) + 5);
@@ -23,10 +23,20 @@ function Cart() {
     });
     return totalAmount;
   };
+  const totalAmountDiscount = Math.round(
+    (getTotalAmount() - (getTotalAmount() * randomDiscount) / 100)
+  ).toFixed(2);
 
+
+  console.log(totalAmountDiscount)
+
+  
+  // (
+  //   getTotalAmount() -
+  //   (getTotalAmount() * randomDiscount) / 100
+  // ).toFixed(1);
   console.log("cart on page", items?.data?.length);
-    const { user } = useUser();
-
+  const { user } = useUser();
 
   const handleRemoveItem = (productId) => {
     dispatch(deleteFromCart(productId)).then(() => {
@@ -131,16 +141,16 @@ function Cart() {
 
                   <div className="flex justify-between !text-base font-medium">
                     <dt>Total</dt>
-                    <dd className="font-bold">{getTotalAmount()} $</dd>
+                    <dd className="font-bold">{getTotalAmount().toFixed(2)} $</dd>
                   </div>
                   <div className="flex justify-between !text-base font-medium">
                     <dt>Total After Discount</dt>
                     <dd className="font-extrabold text-xl">
-                      {(
+                      $ {totalAmountDiscount}
+                      {/* {(
                         getTotalAmount() -
                         (getTotalAmount() * randomDiscount) / 100
-                      ).toFixed(2)}{" "}
-                      $
+                      ).toFixed(2)}{" "} */}
                     </dd>
                   </div>
                 </dl>
@@ -169,12 +179,14 @@ function Cart() {
                 </div>
 
                 <div className="flex justify-end">
-                  <a
-                    href="/checkout"
+                  <button
+                    onClick={() =>
+                      router.push(`/checkout?amount=${totalAmountDiscount}`)
+                    }
                     className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
                   >
                     Checkout
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>

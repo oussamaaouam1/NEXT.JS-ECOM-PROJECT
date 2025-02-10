@@ -37,6 +37,6 @@ body {
 
 @media (max-width: 480px) {
   :root {
-    --header-height: 48px; /* Further adjust for mobile */
+    --header-height: 60px; /* Further adjust for mobile */
   }
 }

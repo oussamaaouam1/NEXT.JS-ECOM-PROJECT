@@ -20,7 +20,7 @@ function ProductSection() {
 
   return (
     <div>
-      <h1 className="text-3xl text-start p-4 bg-slate-200 text-primary font-extrabold">Latest Products</h1>
+      <h1 className="text-3xl text-start p-4 bg-slate-300 text-primary font-extrabold">Latest Products</h1>
       <ProductList productList={productList} />
     </div>
   );

@@ -31,16 +31,11 @@ export default async function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <body>
-          {/* <SignedOut> */}
-            {/* <SignedIn routing='hash' /> */}
-          {/* </SignedOut> */}
-          {/* <SignedIn> */}
             <Providers>
               <Header />
               {children}
               <Footer />
             </Providers>
-          {/* </SignedIn> */}
         </body>
       </html>
     </ClerkProvider>

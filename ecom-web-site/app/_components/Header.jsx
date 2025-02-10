@@ -65,7 +65,7 @@ const Header = () => {
                   <li>
                     <a
                       className="text-gray-500 transition hover:text-gray-500/75"
-                      href="#"
+                      href="/mens-wear"
                     >
                       {" "}
                       Men's Wear{" "}
@@ -138,12 +138,15 @@ const Header = () => {
                 <div className="flex gap-8 items-center ">
                   <UserButton />
                   <div className="pt-6">
-                    <ShoppingCart className="text-primary cursor-pointer" onClick={()=>setOpenCart(!openCart)}/>
+                    <ShoppingCart
+                      className="text-primary cursor-pointer"
+                      onClick={() => setOpenCart(!openCart)}
+                    />
                     <p className="bg-light rounded-full relative bottom-8 left-4 text-center text-black font-bold cursor-pointer">
                       {items?.data?.length}
                     </p>
                   </div>
-                  
+
                   {openCart && <Cart cart={items} />}
                 </div>
               )}
