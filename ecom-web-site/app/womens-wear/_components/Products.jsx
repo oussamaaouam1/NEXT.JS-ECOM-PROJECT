@@ -18,13 +18,13 @@ function Products() {
   );
 
   useEffect(() => {
-    dispatch(getProductsByCategory(2)); // 2 represents men's category
+    dispatch(getProductsByCategory(3)); // 2 represents men's category
   }, [dispatch]);
 
   return (
     <div>
       <h1 className="text-3xl text-start p-4 bg-slate-300 text-primary font-extrabold">
-        Man's Gym Products
+        Women's Gym Products
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4 bg-slate-300">
         {categoryProducts?.map((item) => (

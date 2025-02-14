@@ -6,17 +6,16 @@ import { ShoppingCart } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartItems } from "../_redux/getCartItemsSlice";
 import Cart from "./Cart";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
-  // console.log(window.location.href);
+  const pathname = usePathname();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [openCart, setOpenCart] = useState(false)
+  const [openCart, setOpenCart] = useState(false);
+
   useEffect(() => {
-    setIsLoggedIn(
-      window.location.href.toString().includes("sign-in") ||
-        window.location.href.toString().includes("sign-up")
-    );
-  }, []);
+    setIsLoggedIn(pathname.includes("sign-in") || pathname.includes("sign-up"));
+  }, [pathname]);
 
   const { user } = useUser();
   const dispatch = useDispatch();
@@ -75,7 +74,7 @@ const Header = () => {
                   <li>
                     <a
                       className="text-gray-500 transition hover:text-gray-500/75"
-                      href="#"
+                      href="/womens-wear"
                     >
                       {" "}
                       Women's Wear{" "}

@@ -5,7 +5,7 @@ import Products from './_components/Products'
 
 function MansWear() {
   return (
-    <div>
+    <div className='bg-slate-300'>
       
       <Slider />
       <Banner />
