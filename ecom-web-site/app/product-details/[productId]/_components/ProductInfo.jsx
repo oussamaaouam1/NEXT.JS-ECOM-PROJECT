@@ -9,6 +9,7 @@ import CartApis from "../../../_utils/CartApis";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../_redux/addToCartSlice"; // Import the action
 import { getCartItems } from "../../../_redux/getCartItemsSlice"; // Import the action
+import { toast, Toaster } from "react-hot-toast"; // Add this import
 
 function ProductInfo({ product }) {
   console.log(product?.documentId);
@@ -46,9 +47,22 @@ function ProductInfo({ product }) {
           console.log("Cart Created Successfully");
           // Fetch updated cart items after adding to cart
           dispatch(getCartItems(user.primaryEmailAddress.emailAddress));
+          // alert with toast library "styled alert better than using regular alert"
+          toast.success(`${product.title} added to cart!`, {
+            duration: 3000,
+            position: "top-center",
+            style: {
+              background: "#333",
+              color: "#fff",
+              padding: "20px",
+              borderRadius: "12px",
+            },
+            icon: "🛍️",
+          });
         })
         .catch((error) => {
           console.error("Error adding to cart:", error);
+          toast.error("Failed to add product to cart");
         });
     }
   };
@@ -71,6 +85,7 @@ function ProductInfo({ product }) {
 
   return (
     <div className="flex flex-col text-center">
+      <Toaster />
       {product ? (
         <>
           <h1 className="text-2xl font-bold mb-4 text-black">

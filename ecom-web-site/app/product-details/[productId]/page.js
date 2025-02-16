@@ -14,10 +14,11 @@ import { usePathname } from "next/navigation";
 function ProductDetails({ params }) {
   const dispatch = useDispatch();
   const { product, loading, error } = useSelector((state) => state.productId);
-  const { products: categoryProducts } = useSelector((state) => state.productsCategory);
+  const { products: categoryProducts } = useSelector(
+    (state) => state.productsCategory
+  );
   const path = usePathname();
-  console.log('paath',path);
-
+  console.log("paath", path);
 
   // Unwrap params using React.use()
   const unwrappedParams = React.use(params);
@@ -42,7 +43,6 @@ function ProductDetails({ params }) {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    
     <div className="flex flex-col main-content p-2 bg-slate-300 items-center">
       <BreadCrumb path={path} />
       <div className="flex md:flex-row flex-col mt-10 gap-14">

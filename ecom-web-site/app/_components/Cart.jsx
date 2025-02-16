@@ -80,7 +80,7 @@ function Cart({ cart }) {
         </a>
 
         <a
-          href="#"
+          href="/product-details"
           className="inline-block text-sm text-gray-500 underline underline-offset-4 transition hover:text-gray-600"
         >
           Continue shopping
