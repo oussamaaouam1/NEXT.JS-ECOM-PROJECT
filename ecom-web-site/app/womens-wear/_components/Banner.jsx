@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import React from "react";
 
@@ -16,10 +17,14 @@ function Banner() {
             </strong>
           </h1>
 
-          
-
           <div className="mt-8 flex flex-wrap gap-4 text-center ">
             <a
+              onClick={() => {
+                window.scrollTo({
+                  top: window.innerHeight * 1.06, // Scroll to products
+                  behavior: "smooth", // Smooth scrolling effect
+                });
+              }}
               href="#"
               className="block w-full rounded-full bg-primary px-12 py-3 text-md font-bold  text-white shadow hover:bg-secondary focus:outline-none focus:ring active:bg-rose-500 sm:w-auto duration-500"
             >

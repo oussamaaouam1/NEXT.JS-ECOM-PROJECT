@@ -5,6 +5,7 @@ import { deleteFromCart } from "../_redux/deleteCartItemSlice";
 import { getCartItems } from "../_redux/getCartItemsSlice"; // Import the action
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 function Cart() {
   const [randomDiscount, setRandomDiscount] = React.useState(0);
@@ -24,13 +25,11 @@ function Cart() {
     return totalAmount;
   };
   const totalAmountDiscount = Math.round(
-    (getTotalAmount() - (getTotalAmount() * randomDiscount) / 100)
+    getTotalAmount() - (getTotalAmount() * randomDiscount) / 100
   ).toFixed(2);
 
+  console.log(totalAmountDiscount);
 
-  console.log(totalAmountDiscount)
-
-  
   // (
   //   getTotalAmount() -
   //   (getTotalAmount() * randomDiscount) / 100
@@ -141,7 +140,9 @@ function Cart() {
 
                   <div className="flex justify-between !text-base font-medium">
                     <dt>Total</dt>
-                    <dd className="font-bold">{getTotalAmount().toFixed(2)} $</dd>
+                    <dd className="font-bold">
+                      {getTotalAmount().toFixed(2)} $
+                    </dd>
                   </div>
                   <div className="flex justify-between !text-base font-medium">
                     <dt>Total After Discount</dt>
@@ -180,10 +181,21 @@ function Cart() {
 
                 <div className="flex justify-end">
                   <button
-                    onClick={() =>
-                      router.push(`/checkout?amount=${totalAmountDiscount}`)
-                    }
-                    className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
+                    onClick={() => {
+                      if (!items?.data?.length || totalAmountDiscount <= 0) {
+                        toast.error(
+                          "Please add products to your cart before checkout"
+                        );
+                        return;
+                      }
+                      router.push(`/checkout?amount=${totalAmountDiscount}`);
+                    }}
+                    className={`block rounded px-5 py-3 text-sm text-gray-100 transition ${
+                      !items?.data?.length || totalAmountDiscount <= 0
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-gray-700 hover:bg-gray-600"
+                    }`}
+                    disabled={!items?.data?.length || totalAmountDiscount <= 0}
                   >
                     Checkout
                   </button>

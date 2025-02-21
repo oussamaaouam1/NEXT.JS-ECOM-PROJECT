@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 const Hero = () => {
@@ -22,6 +23,12 @@ const Hero = () => {
 
           <div className="mt-8 flex flex-wrap gap-4 text-center ">
             <a
+              onClick={() => {
+                window.scrollTo({
+                  top: window.innerHeight * 0.94, // Scroll to 60% of the viewport height
+                  behavior: "smooth", // Smooth scrolling effect
+                });
+              }}
               href="#"
               className="block w-full rounded bg-primary px-12 py-3 text-sm font-medium text-white shadow hover:bg-secondary focus:outline-none focus:ring active:bg-rose-500 sm:w-auto duration-500"
             >
@@ -29,6 +36,12 @@ const Hero = () => {
             </a>
 
             <a
+              onClick={() => {
+                window.scrollTo({
+                  top: window.innerHeight * 3, // Scroll to 60% of the viewport height
+                  behavior: "smooth", // Smooth scrolling effect
+                });
+              }}
               href="#"
               className="block w-full rounded bg-light px-12 py-3 text-sm font-medium text-black shadow hover:text-white focus:outline-none focus:ring active:text-rose-500 sm:w-auto duration-500"
             >

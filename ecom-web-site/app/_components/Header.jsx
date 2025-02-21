@@ -11,7 +11,7 @@ import { usePathname } from "next/navigation";
 const Header = () => {
   const pathname = usePathname();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [openCart, setOpenCart] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   useEffect(() => {
     setIsLoggedIn(pathname.includes("sign-in") || pathname.includes("sign-up"));
@@ -32,20 +32,26 @@ const Header = () => {
     console.log("Cart Items Updated:", items); // Log the cart items
   }, [items]);
 
+  const toggleCart = () => {
+    setIsCartOpen(!isCartOpen);
+  };
+
   return (
     !isLoggedIn && (
       <header className="bg-white fixed top-0 left-0 right-0 z-50 shadow-md header">
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="md:flex md:items-center md:gap-12">
-              <Image
-                src="/sports wear.png"
-                alt="logo"
-                width={85}
-                height={80}
-                color="#ffff"
-                className="mt-2"
-              />
+              <a href="/" className="hover:cursor-pointer">
+                <Image
+                  src="/sports wear.png"
+                  alt="logo"
+                  width={85}
+                  height={80}
+                  color="#ffff"
+                  className="mt-2"
+                />
+              </a>
             </div>
 
             <div className="hidden md:block ">
@@ -84,7 +90,7 @@ const Header = () => {
                   <li>
                     <a
                       className="text-gray-500 transition hover:text-gray-500/75"
-                      href="#"
+                      href="/accessories"
                     >
                       {" "}
                       Accessories{" "}
@@ -94,7 +100,7 @@ const Header = () => {
                   <li>
                     <a
                       className="text-gray-500 transition hover:text-gray-500/75"
-                      href="#"
+                      href="/about-us"
                     >
                       {" "}
                       About Us{" "}
@@ -104,7 +110,7 @@ const Header = () => {
                   <li>
                     <a
                       className="text-gray-500 transition hover:text-gray-500/75"
-                      href="#"
+                      href="/contact-us"
                     >
                       {" "}
                       Contact Us{" "}
@@ -137,16 +143,16 @@ const Header = () => {
                 <div className="flex gap-8 items-center ">
                   <UserButton />
                   <div className="pt-6">
-                    <ShoppingCart
-                      className="text-primary cursor-pointer"
-                      onClick={() => setOpenCart(!openCart)}
-                    />
-                    <p className="bg-light rounded-full relative bottom-8 left-4 text-center text-black font-bold cursor-pointer">
-                      {items?.data?.length}
-                    </p>
+                    <div
+                      className="relative cursor-pointer"
+                      onClick={toggleCart}
+                    >
+                      <ShoppingCart className="text-primary" />
+                      <p className="bg-light rounded-full relative bottom-8 left-4 text-center text-black font-bold cursor-pointer">
+                        {items?.data?.length}
+                      </p>
+                    </div>
                   </div>
-
-                  {openCart && <Cart cart={items} />}
                 </div>
               )}
 
@@ -171,6 +177,15 @@ const Header = () => {
             </div>
           </div>
         </div>
+
+        {/* Cart component with new props */}
+        {isCartOpen && (
+          <Cart
+            cart={items}
+            isOpen={isCartOpen}
+            onClose={() => setIsCartOpen(false)}
+          />
+        )}
       </header>
     )
   );
