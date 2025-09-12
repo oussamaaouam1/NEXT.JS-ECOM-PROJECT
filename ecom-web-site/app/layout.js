@@ -7,8 +7,8 @@ import {
   SignInButton,
   SignedIn,
   SignedOut,
-  UserButton
-} from '@clerk/nextjs'
+  UserButton,
+} from "@clerk/nextjs";
 export const metadata = {
   title: "ACTIVE SW",
   description: "POWER YOUR WORKOUT",
@@ -18,7 +18,6 @@ export const metadata = {
         url: "/activ-web-icon.svg", // Make sure this matches your icon's path in public folder
         href: "/activ-web-icon.svg",
         sizes: "64x64",
-        
       },
     ],
     shortcut: "/activ-web-icon.svg",
@@ -26,16 +25,18 @@ export const metadata = {
   },
 };
 
-export default async function RootLayout({ children }) {
+export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    >
       <html lang="en">
         <body>
-            <Providers>
-              <Header />
-              {children}
-              <Footer />
-            </Providers>
+          <Providers>
+            <Header />
+            {children}
+            <Footer />
+          </Providers>
         </body>
       </html>
     </ClerkProvider>
