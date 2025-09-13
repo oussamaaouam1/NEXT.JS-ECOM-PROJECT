@@ -8,6 +8,8 @@ import { getCartItems } from "../_redux/getCartItemsSlice";
 import Cart from "./Cart";
 import { usePathname } from "next/navigation";
 
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+
 const Header = () => {
   const pathname = usePathname();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -124,8 +126,8 @@ const Header = () => {
               {!user ? (
                 <div className="sm:flex sm:gap-4">
                   <a
-                    className="rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white shadow hover:bg-secondary transition duration-500 hover:text-black "
-                    href="http://localhost:3000/sign-in?redirect_url=http%3A%2F%2Flocalhost%3A3000%2F"
+                    className="rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white shadow hover:bg-secondary transition duration-500 hover:text-black"
+                    href={`${baseUrl}/sign-in?redirect_url=${encodeURIComponent(baseUrl)}/`}
                   >
                     Login
                   </a>
@@ -133,7 +135,7 @@ const Header = () => {
                   <div className="hidden sm:flex">
                     <a
                       className="rounded-md bg-light px-5 py-2.5 text-sm font-medium text-black hover:bg-primary duration-300 hover:text-white"
-                      href="http://localhost:3000/sign-up?redirect_url=http%3A%2F%2Flocalhost%3A3000%2F"
+                      href={`${baseUrl}/sign-up?redirect_url=${encodeURIComponent(baseUrl)}/`}
                     >
                       Register
                     </a>
