@@ -129,11 +129,10 @@ ecommerce-strapi/
 ## 🚀 Deployment
 
 ### Frontend
-The Next.js application can be deployed on [Vercel](https://vercel.com).
+The Next.js application can be deployed on [Vercel](https://vercel.com) or [Netlify](https://www.netlify.com/).
 
 ### Backend
 The Strapi backend can be deployed on any Node.js hosting platform or using [Strapi Cloud](https://cloud.strapi.io).
 
 ## 📝 License
 
-[MIT](LICENSE)
